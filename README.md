@@ -41,7 +41,7 @@ postgres-world/
 - **`sql/`**: Scripts SQL organizados secuencialmente.
 - **`data/`**: Datos limpios y listos para importar.
 - **`original/`**: Copia de respaldo de archivos recibidos originalmente.
-- **`img/`**: Evidencias en capturas de pantalla.
+- **`img/`**: Evidencias completas en capturas de pantalla.
 - **`world_backup.sql`**: Volcado lógico completo listo para restauración.
 
 ---
@@ -72,23 +72,34 @@ Reinicia la base de datos e inicializa las tablas principales:
 \i /tmp/postgres-world/sql/00_reset.sql
 \i /tmp/postgres-world/sql/01_schema.sql
 ```
-![Esquema y Reset](img/resetAndSchema.png)
+
+#### Evidencia de Esquema y Reset:
+![Reset y Esquema](img/resetAndSchema.png)
 
 ---
 
 ### Paso 2: Carga de Datos
 Carga la información de países, ciudades e idiomas:
+
 ```sql
 \i /tmp/postgres-world/data/country.sql
+```
+#### Evidencia de Inserción de Países (`country`):
+![Inserción de Países](img/insertCountries.png)
+
+```sql
 \i /tmp/postgres-world/data/city.sql
+```
+#### Evidencia de Inserción de Ciudades (`city`):
+![Inserción de Ciudades](img/insertCity.png)
+
+```sql
 \i /tmp/postgres-world/data/countrylanguage.sql
 ```
+#### Evidencia de Inserción de Idiomas (`countrylanguage`):
+![Inserción de Idiomas](img/insertCountryLanguage.png)
 
-| Países (`country`) | Ciudades (`city`) | Idiomas (`countrylanguage`) |
-|---|---|---|
-| ![Países](img/insertCountries.png) | ![Ciudades](img/insertCity.png) | ![Idiomas](img/insertCountryLanguage.png) |
-
-**Verificar conteo de registros:**
+#### Verificar conteo de registros:
 ```sql
 SELECT COUNT(*) FROM country;
 SELECT COUNT(*) FROM city;
@@ -103,6 +114,7 @@ Crea la tabla `continent` e inserta los continentes únicos extraídos de `count
 ```sql
 \i /tmp/postgres-world/sql/02_continent.sql
 ```
+#### Evidencia de Creación e Inserción de Continentes:
 ![Continentes](img/continents.png)
 
 ---
@@ -113,9 +125,11 @@ Establece las relaciones entre tablas e integridad referencial (`FOREIGN KEY`):
 \i /tmp/postgres-world/sql/03_constraints.sql
 ```
 
-| Aplicación de Constraints | Modelo de Relaciones |
-|---|---|
-| ![ALTER Constraints](img/alter.png) | ![Relaciones](img/relationsCountry.png) |
+#### Evidencia de Aplicación de Restricciones (ALTER TABLE):
+![ALTER Constraints](img/alter.png)
+
+#### Evidencia del Modelo de Relaciones entre Tablas:
+![Modelo de Relaciones](img/relationsCountry.png)
 
 ---
 
@@ -124,6 +138,7 @@ Comprueba que no existan huérfanos, capitales inválidas o datos inconsistentes
 ```sql
 \i /tmp/postgres-world/sql/04_verify.sql
 ```
+#### Evidencia de Verificación Total:
 ![Verificación Total](img/verifyAll.png)
 
 ---
@@ -133,7 +148,7 @@ Comprueba que no existan huérfanos, capitales inválidas o datos inconsistentes
 ### Exportar Volcado (`pg_dump`)
 Desde la terminal del sistema:
 ```bash
-docker bash -c "docker exec -t postgres_db pg_dump -U postgres postgres > world_backup.sql"
+docker exec -t postgres_db pg_dump -U postgres postgres > world_backup.sql
 ```
 
 ### Restaurar Volcado (`psql`)
