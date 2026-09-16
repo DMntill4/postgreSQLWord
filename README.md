@@ -30,14 +30,12 @@ postgres-world/
 │   ├── city.sql
 │   ├── country.sql
 │   └── countrylanguage.sql
-├── sql/
-│   ├── 00_reset.sql
-│   ├── 01_schema.sql
-│   ├── 02_continent.sql
-│   ├── 03_constraints.sql
-│   └── 04_verify.sql
-└── tools/
-    └── check_data.py
+└── sql/
+    ├── 00_reset.sql
+    ├── 01_schema.sql
+    ├── 02_continent.sql
+    ├── 03_constraints.sql
+    └── 04_verify.sql
 ```
 
 ---
@@ -48,7 +46,6 @@ postgres-world/
 - **`data/`**: Los archivos de datos limpios y listos para importar en PostgreSQL (`country`, `city`, `countrylanguage`).
 - **`original/`**: Copia de respaldo de los archivos entregados originalmente antes del proceso de corrección.
 - **`img/`**: Capturas de pantalla que sirven como evidencia visual de la ejecución de los comandos y consultas.
-- **`tools/`**: Script de auditoría estática automatizada desarrollado en Python (`check_data.py`).
 - **`world_backup.sql`**: Volcado lógico completo preparado a partir del estado final verificado del proyecto.
 
 ---
